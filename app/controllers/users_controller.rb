@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+      before_action :authenticate_user!
     
       def index
         @users = User.scoped
@@ -36,4 +38,5 @@ class UsersController < ApplicationController
       def user_params
         params.require(:user).permit(:name, :role)
       end
+
 end
