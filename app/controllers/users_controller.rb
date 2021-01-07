@@ -33,6 +33,9 @@ class UsersController < ApplicationController
         redirect_to home_path           #routes are not yet defined
       end
 
+      def my_portfolio
+      end
+
       private 
 
       def user_params

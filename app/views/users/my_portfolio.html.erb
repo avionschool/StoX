@@ -1,0 +1,16 @@
+<h1>My Portfolio</h1>
+
+<h2>Search Stocks</h2>
+<%= form_tag search_stock_path, method: :get do %>
+  <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker symbol", autofocus: true %>
+  <%= button_tag type: :submit do %>
+    <%= 'Search' %>
+  <% end %>
+<% end %>
+
+<% if @stock %>
+  <h3>Stock Info</h3>
+  Symbol: <%= @stock.ticker %>
+  Name: <%= @stock.name %>
+  Price: <%= @stock.latest_price %>
+<% end %>
