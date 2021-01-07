@@ -1,1 +1,12 @@
-<h1>Welcome</h1>
+<% if current_user.role.name == 'Broker'  %>
+    <h1>Broker's Portal</h1>
+<% else %>
+    <h1>Buyer's Portal</h1>
+<% end %>
+<hr>
+
+<%= 'Hi ' %><b><%= current_user.name %></b><%= '!' %><br>
+<%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+
+
+
