@@ -2,45 +2,28 @@ class UsersController < ApplicationController
 
       before_action :authenticate_user!
     
-      def index
-        @users = User.all
-      end
-    
+      # before_action :authenticate_user!, :is_admin?
+
       def show
-        @user = User.find(params[:id])
-      end
-    
-      def create
-        @user = User.new(user_params)
-        @user.save 
         
-        redirect_to home_path                #routes are not yet defined
-      end
-    
-      def update
-        @user = User.find(params[:id])
-        @user.update(user_params)
-      end
-    
-      def edit
-        @user = User.find(params[:id])
-      end
-    
-      def destroy
-        @user = User.find(params[:id])
-        @user.destroy
-
-        redirect_to home_path           #routes are not yet defined
       end
 
-      def my_portfolio
-        @tracked_stocks = current_user.stocks
+      def new
+        @user = User.new
       end
 
-      private 
-
-      def user_params
-        params.require(:user).permit(:name, :role)
+      def create
+        @user = User.new(params[:user])
+        if @user.save
+          UserMailer.welcome_email(@user).deliver_now
+          flash[:success] = "Object successfully created"
+          redirect_to @user
+        else
+          flash[:error] = "Something went wrong"
+          render 'new'
+        end
       end
-
+      
+      
+      
 end
