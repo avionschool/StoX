@@ -12,4 +12,10 @@ class User < ApplicationRecord
                       
   belongs_to :role
 
+  def stock_tracked(ticker_symbol)
+    stock = Stock.check_db(ticker_symbol)
+    return false unless stock
+    stocks.where(id: stock.id).exists?
+  end
+
 end
