@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :buyer_stocks
+  resources :transactions
   resources :user_stocks, only: [:create, :destroy]
   devise_for :users
   resources :roles
