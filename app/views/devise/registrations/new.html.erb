@@ -28,7 +28,10 @@
 
   <div class="field">
     <%= f.label :role_id %><br>
-    <%= f.select :role_id, options_from_collection_for_select(Role.all, :id, :name, f.object.role_id) %>
+      <% @buyer_role = Role.find_by(name: "Buyer") %>
+      <% @broker_role = Role.find_by(name: "Broker") %>
+      
+    <%= f.select :role_id, options_for_select([[@broker_role.name, @broker_role.id], [@buyer_role.name, @buyer_role.id]]) %>
   </div>
 
   <div class="actions">

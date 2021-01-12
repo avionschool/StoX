@@ -12,6 +12,12 @@ class User < ApplicationRecord
                       
   belongs_to :role
 
+  after_create :welcome_email
+
+  def welcome_email
+      UserMailer.welcome_email(self).deliver
+  end
+
   def stock_tracked(ticker_symbol)
     stock = Stock.check_db(ticker_symbol)
     return false unless stock
