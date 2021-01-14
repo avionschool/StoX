@@ -18,11 +18,26 @@ class User < ApplicationRecord
                       
   belongs_to :role
 
+  before_create :set_status
   after_create :welcome_email
 
-  def welcome_email
-      UserMailer.welcome_email(self).deliver
+
+  def set_status
+    if self.role_id == 2
+      self.approved = false
+    else 
+      self.approved = true
+    end
   end
+
+  def welcome_email
+    if self.role_id == 1
+      UserMailer.welcome_email(self).deliver
+    elsif self.role_id == 2
+      UserMailer.pending_email(self).deliver
+    end
+  end
+
 
   def stock_tracked(ticker_symbol)
     stock = Stock.check_db(ticker_symbol)

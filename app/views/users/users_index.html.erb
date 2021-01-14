@@ -1,10 +1,6 @@
 <div 
     class="app_name"><h1>Users</h1>
-    
 </div>                               
-
-
-
 <div class="category-item">
     <table class="table_heads">
         <thead >
@@ -13,22 +9,27 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Status</th>
+
             </tr>
         </thead>
 
         <tbody>
-        <% @users.each do |user| %>
-            <tr>
+            <% User.all.each do |user| %>
+                <tr>
                     <td><%= user.name %><br></td>
                     <td><%= user.email %></td>
                     <td><%= user.role.name %></td>
-                    <td class="no_line"> 
-                    <%= link_to 'Edit', edit_category_path(user.id) %>
-                    </td>
-            </tr>
-        <% end %>
+                    <td><%= if user.approved == true
+                                user.approved = "Approved"
+                            else  
+                                user.approved = "Pending"
+                            end %></td>
+                    <td class="no_line"><%= button_to "Activate", method: :approve %></td>
+                </tr>
+            <% end %>
         </tbody>    
     </table>
 </div>
+
  
 <%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
