@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get 'my_portfolio', to: 'users#my_portfolio'
   get 'search_stock', to: 'stocks#search'
   get 'manage_users', to: 'users#users_index'
+  post 'manage_users',  to: 'users#users_index'
   
 end
