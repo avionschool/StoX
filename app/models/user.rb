@@ -45,8 +45,4 @@ class User < ApplicationRecord
     stocks.where(id: stock.id).exists?
   end
 
-  private
-
- 
-
 end
