@@ -10,4 +10,10 @@ class UserMailer < ApplicationMailer
 
     mail(to: @user.email, subject: 'Welcome to StoX!')
   end
+
+  def pending_email(user)
+    @user = user
+
+    mail(to: @user.email, subject: 'Please wait for your account to be approved!')
+  end
 end
