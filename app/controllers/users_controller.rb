@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       end
 
       def my_portfolio
-        @tracked_stocks = current_user.stocks
+        @tracked_stocks = current_user.broker_stocks
       end
 
       private 
