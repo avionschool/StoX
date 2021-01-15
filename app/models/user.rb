@@ -2,11 +2,8 @@ class User < ApplicationRecord
   has_many :user_stocks
   has_many :broker_stocks, class_name: "Stock", through: :user_stocks, source: :stock
 
-  # has_many :buyer_stocks
-  # has_many :buyerstocks, class_name: "Stock", through: :buyer_stocks
-
   has_many :transactions
-  has_many :buyerstocks, class_name: "Stock", through: :transactions
+  has_many :buyer_stocks, class_name: "Stock", through: :transactions
     
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
