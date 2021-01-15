@@ -1,12 +1,9 @@
 class User < ApplicationRecord
   has_many :user_stocks
-  has_many :stocks, through: :user_stocks
-
-  has_many :buyer_stocks
-  has_many :stocks, through: :buyer_stocks
+  has_many :broker_stocks, class_name: "Stock", through: :user_stocks, source: :stock
 
   has_many :transactions
-  has_many :stocks, through: :transactions
+  has_many :buyer_stocks, class_name: "Stock", through: :transactions
     
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -42,7 +39,7 @@ class User < ApplicationRecord
   def stock_tracked(ticker_symbol)
     stock = Stock.check_db(ticker_symbol)
     return false unless stock
-    stocks.where(id: stock.id).exists?
+    broker_stocks.where(id: stock.id).exists?
   end
 
 end
