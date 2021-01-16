@@ -1,35 +1,34 @@
-<div 
-    class="app_name"><h1>Users</h1>
-</div>                               
-<div class="category-item">
-    <table class="table_heads">
-        <thead >
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-
-            </tr>
-        </thead>
-
-        <tbody>
-            <% User.all.each do |user| %>
-                <tr>
-                    <td><%= user.name %><br></td>
-                    <td><%= user.email %></td>
-                    <td><%= user.role.name %></td>
-                    <td><%= if user.approved == true
-                                user.approved = "Approved"
-                            else  
-                                user.approved = "Pending"
-                            end %></td>
-                    <td class="no_line"><%= button_to "Activate", method: :approve %></td>
+<div class = "columns is-centered">
+  <div class = "column is-two-thirds">
+    <h1 class = "is-size-2 has-text-weight-bold mb-3">Users</h1>                               
+    <div class="content">
+        <table class = "table is-striped is-bordered is-fullwidth">
+            <thead>
+                <tr class="th is-selected is-dark">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
-            <% end %>
-        </tbody>    
-    </table>
-</div>
+            </thead>
 
+            <tbody>
+                <% User.all.each do |user| %>
+                    <tr>
+                        <td><%= user.name %><br></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.role.name %></td>
+                        <td><%= if user.approved == true
+                                    user.approved = "Approved"
+                                else  
+                                    user.approved = "Pending"
+                                end %></td>
+                        <td><%= button_to "Activate", method: :approve %></td>
+                    </tr>
+                <% end %>
+            </tbody>    
+        </table>
+  </div>
+</div>
  
-<%= link_to('Logout', destroy_user_session_path, method: :delete) %>  

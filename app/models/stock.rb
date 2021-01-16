@@ -1,12 +1,12 @@
 class Stock < ApplicationRecord
   has_many :user_stocks
-  has_many :users, through: :user_stocks
+  has_many :brokers, class_name: "User", through: :user_stocks, source: :user
 
-  has_many :buyer_stocks
-  has_many :users, through: :buyer_stocks
+  # has_many :buyer_stocks
+  # has_many :users, through: :buyer_stocks
 
   has_many :transactions
-  has_many :users, through: :transactions
+  has_many :buyers, class_name: "User", through: :transactions
 
   validates :name, :ticker, presence: true
 

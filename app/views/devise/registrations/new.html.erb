@@ -1,42 +1,46 @@
-<h2>Sign up</h2>
+<div class = "columns is-centered">
+  <div class = "column is-two-thirds">
+    <h1 class = "is-size-2 has-text-weight-bold mt-3 mb-3">Sign up</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :role_id %><br>
-      <% @buyer_role = Role.find_by(name: "Buyer") %>
-      <% @broker_role = Role.find_by(name: "Broker") %>
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      </div>
       
-    <%= f.select :role_id, options_for_select([[@broker_role.name, @broker_role.id], [@buyer_role.name, @buyer_role.id]]) %>
-  </div>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
 
-<%= render "devise/shared/links" %>
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :role_id %><br>
+          <% @buyer_role = Role.find_by(name: "Buyer") %>
+          <% @broker_role = Role.find_by(name: "Broker") %>
+          
+        <%= f.select :role_id, options_for_select([[@broker_role.name, @broker_role.id], [@buyer_role.name, @buyer_role.id]]) %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: "button is-info mb-5" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

@@ -2,14 +2,17 @@
 
 <% if @stock %>
   <h3>Stock Info</h3>
-  Symbol: <%= @stock.ticker %>
-  Name: <%= @stock.name %>
-  Price: <%= @stock.latest_price %>
-  <% if !current_user.stock_tracked(@stock.ticker) %>
-    <%= link_to 'Add', user_stocks_path(user: current_user, ticker: @stock.ticker), method: :post %>
-  <% else %>
-    <span>You are already tracking this stock.</span>
-  <% end %>
+  <table>
+  <tr>
+    <td>Symbol: <%= @stock.ticker %></td>
+    <td>Name: <%= @stock.name %></td>
+    <td>Price: <%= @stock.latest_price %></td>
+    <td>
+      <% if !current_user.stock_tracked(@stock.ticker) %>
+        <%= link_to 'Add', user_stocks_path(user: current_user, ticker: @stock.ticker), method: :post, class: "button is-small is-success" %>
+      <% else %>
+        <span>You are already tracking this stock.</span>
+      <% end %>
+    </td>
+  </tr>
 <% end %>
-<br>
-<br>

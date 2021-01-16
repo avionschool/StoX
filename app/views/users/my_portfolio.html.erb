@@ -1,43 +1,38 @@
-<h1><%= current_user.name %>'s Portfolio</h1>
+<div class = "columns is-centered">
+    <div class = "column is-two-thirds">
+      <h1 class = "is-size-2 has-text-weight-bold mb-4"><%= current_user.name %>'s Portfolio</h1>
 
-<% if (current_user.role_id === 2) %>
-  <h2>Search Stocks</h2>
-  <%= form_tag search_stock_path, remote: true, method: :get do %>
-    <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker symbol", autofocus: true %>
-    <%= button_tag type: :submit do %>
-      <%= 'Search' %>
-    <% end %>
-  <% end %>
+      <div class = "content">
+      <% if (current_user.role_id === 2) %>
+        <%= render 'stocks/search' %>
 
-  <br>
+        <div id="results">
+        </div>
 
-  <div id="results">
-  </div>
-
-  <% if !@tracked_stocks.empty? %>
-    <h2>Tracked Stocks</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Ticker</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @tracked_stocks.each do |stock| %>
-          <tr>
-            <td><%= stock.ticker %></td>
-            <td><%= stock.name %></td>
-            <td><%= stock.latest_price %></td>
-            <td><%= link_to 'Remove', user_stock_path(stock), method: :delete, data: {confirm: 'Are you sure?'} %></td>
-          </tr>
+        <% if !@tracked_stocks.empty? %>
+          <h2 class = "is-size-3 mb-3">Tracked Stocks</h2>
+          <table class = "table is-striped is-bordered is-fullwidth">
+            <thead>
+              <tr class="th is-selected is-dark">
+                <th>Ticker</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tracked_stocks.each do |stock| %>
+                <tr>
+                  <td><%= stock.ticker %></td>
+                  <td><%= stock.name %></td>
+                  <td><%= stock.latest_price %></td>
+                  <td><%= link_to 'Remove', user_stock_path(stock), method: :delete, data: {confirm: 'Are you sure?'}, class: "button is-small is-warning" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         <% end %>
-      </tbody>
-    </table>
-  <% end %>
-<% end %>
-
-<br>
-<%= link_to 'Back to Home', root_path %>
+      <% end %>
+      </div>
+  </div>
+</div>
