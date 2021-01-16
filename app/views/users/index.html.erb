@@ -1,17 +1,16 @@
-<% if current_user.role.name == 'Broker'  %>
-    <h1>Broker's Portal</h1>
-<% elsif current_user.role.name == 'Buyer' %>
-    <h1>Buyer's Portal</h1>
-<% elsif current_user.role.name == 'Admin' %>
-    <h1>Admin's Portal</h1>
-<% end %>
-<hr>
+<div class = "columns is-centered">
+  <div class = "column is-two-thirds">
 
-<% if current_user.role.name == 'Broker' || current_user.role.name == 'Buyer' %>
-    <%= link_to 'My Portfolio', my_portfolio_path %>
-<% else %>
-    <%= link_to 'Manage Users', manage_users_path %>
-<% end %>
-<br>
-<%= link_to('Logout', destroy_user_session_path, method: :delete) %>  
+    <% if current_user.role.name == 'Broker'  %>
+        <h1 class = "is-size-2 has-text-weight-bold mb-3">Broker's Portal</h1>
+    <% elsif current_user.role.name == 'Buyer' %>
+        <h1 class = "is-size-2 has-text-weight-bold mb-3">Buyer's Portal</h1>
+    <% elsif current_user.role.name == 'Admin' %>
+        <h1 class = "is-size-2 has-text-weight-bold mb-3">Admin's Portal</h1>
+    <% end %>
+    <hr>
 
+    <h2 class = "is-size-3 mb-3">Welcome to StoX!</h2>
+
+  </div>
+</div>

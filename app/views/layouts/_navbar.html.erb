@@ -1,0 +1,38 @@
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item">
+      <strong>StoX</strong>
+    </a>  
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+    <% if current_user %>
+      <a>
+        <%= link_to 'Home', root_path, class: "navbar-item" %>
+      </a>
+
+      <a>
+        <% if current_user.role.name == 'Broker' || current_user.role.name == 'Buyer' %>
+          <%= link_to 'My Portfolio', my_portfolio_path, class: "navbar-item" %>
+        <% else %>
+          <%= link_to 'Manage Users', manage_users_path, class: "navbar-item" %>
+        <% end %>
+      </a>
+    <% end %>
+    </div>
+
+    <div class="navbar-end">
+    <% if current_user %>
+      <div class="navbar-item">
+        <div class="buttons">
+          
+          <a>
+              <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "button is-light") %>
+          </a>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</nav>
