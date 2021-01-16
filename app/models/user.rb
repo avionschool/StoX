@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true
+  validates :approved, presence: true
                       
   belongs_to :role
 
@@ -37,6 +38,11 @@ class User < ApplicationRecord
       UserMailer.pending_email(self).deliver
     end
   end
+
+  def approve_application
+    self.toggle(:approved).save
+  end
+  
 
 
   def stock_tracked(ticker_symbol)
